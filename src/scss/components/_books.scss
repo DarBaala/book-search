@@ -1,0 +1,54 @@
+.books {
+  display: flex;
+  padding: 50px 0;
+  text-align: center;
+  color: white;
+  &__wrapper {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 40px;
+    grid-row-gap: 40px;
+  }
+  &__items {
+    background-color: #191b1d;
+    width: 230px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+  &__img {
+    margin: 20px 0 20px 0;
+    width: 130px;
+    height: 190px;
+    object-fit: cover;
+  }
+  &__title {
+    text-align: left;
+    font-weight: 500;
+    width: 200px;
+    margin-bottom: 20px;
+  }
+  &__authors {
+    color: darkgray;
+    text-align: left;
+    font-weight: 500;
+    width: 200px;
+    margin-bottom: 20px;
+  }
+  &__categories {
+    color: darkgray;
+    text-align: left;
+    font-weight: 500;
+    width: 200px;
+    margin-bottom: 20px;
+    text-decoration: underline;
+  }
+}
