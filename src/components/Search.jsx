@@ -6,16 +6,18 @@ import { setSearch, fetchBooks } from "../redux/slices/bookSlice";
 
 const Search = () => {
   const dispatch = useDispatch();
+
   const searchField = useSelector((state) => state.book.searchField);
-  const categoryId = useSelector((state) => state.book.categoryId);
-  const ffd = useSelector((state) => state.book.searchField);
+  const category = useSelector((state) => state.book.category);
+  const sort = useSelector((state) => state.book.sort);
 
   const getBooks = async (event) => {
-    const category = categoryId > 0 ? `category=${categoryId}` : "";
+    event.preventDefault();
+    const categoryUrl = category.length > 0 ? `&orderBy=${category}` : "";
+    const sortUrl = sort.length < 1 && sort !== "all" ? "" : `subject:${sort}`;
 
     if (searchField.length > 0) {
-      event.preventDefault();
-      dispatch(fetchBooks(searchField));
+      dispatch(fetchBooks({ searchField, sortUrl, categoryUrl }));
     } else {
       alert("Заполните поле ввода!");
     }

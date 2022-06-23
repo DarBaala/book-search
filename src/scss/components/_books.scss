@@ -8,6 +8,15 @@
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 40px;
     grid-row-gap: 40px;
+    @media (max-width: 1150px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: 880px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 880px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
   &__items {
     background-color: #191b1d;

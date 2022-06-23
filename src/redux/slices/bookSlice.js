@@ -1,35 +1,29 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const fetchBooks = createAsyncThunk(
-  "book/fetchNews",
-  async (searchField) => {
-    try {
-      const apiKey = "AIzaSyDCYdGas97LB1afNBZ3zlYaUlvjpaCerNc";
-      const { data } = await axios.get(
-        `https://www.googleapis.com/books/v1/volumes?q=${searchField}&key=${apiKey}`
-      );
-      console.log(data.items);
-      return data.items;
-    } catch (error) {
-      console.log("Error");
-    }
-  }
-);
+export const fetchBooks = createAsyncThunk("book/fetchNews", async (params) => {
+  const { categoryUrl, sortUrl, searchField } = params;
+  const apiKey = "AIzaSyDCYdGas97LB1afNBZ3zlYaUlvjpaCerNc";
+  const { data } = await axios.get(
+    `https://www.googleapis.com/books/v1/volumes?q=${searchField}${categoryUrl}&${sortUrl}&key=${apiKey}`
+  );
+  return data.items;
+});
 
 export const bookSlice = createSlice({
   name: "book",
   initialState: {
     books: [],
     searchField: "",
-    categoryId: 0,
+    category: "",
+    sort: "",
   },
   reducers: {
     setSearch(state, action) {
       state.searchField = action.payload;
     },
-    setCategoryId(state, action) {
-      state.categoryId = action.payload;
+    setCategory(state, action) {
+      state.category = action.payload;
     },
     setSort(state, action) {
       state.sort = action.payload;
@@ -38,7 +32,6 @@ export const bookSlice = createSlice({
   extraReducers: {
     [fetchBooks.pending]: (state) => {
       state.status = "loading";
-      state.status = null;
     },
     [fetchBooks.fulfilled]: (state, action) => {
       state.status = "success";
@@ -50,6 +43,6 @@ export const bookSlice = createSlice({
   },
 });
 
-export const { setSearch } = bookSlice.actions;
+export const { setSearch, setCategory, setSort } = bookSlice.actions;
 
 export default bookSlice.reducer;
