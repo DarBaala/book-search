@@ -3,12 +3,12 @@ import { useSelector } from "react-redux";
 
 const BookCard = () => {
   const books = useSelector((state) => state.book.books);
-
+  let { items } = books;
   const truncate = (str) => {
     return str.length > 40 ? str.substring(0, 37) + "..." : str;
   };
 
-  return books.map(({ id, volumeInfo }) => (
+  return items.map(({ id, volumeInfo }) => (
     <div key={id} className="books__items">
       <img
         className="books__img"

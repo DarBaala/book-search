@@ -1,8 +1,12 @@
 .books {
   display: flex;
-  padding: 50px 0;
+  flex-direction: column;
   text-align: center;
   color: white;
+  &__text {
+    font-size: 20px;
+    margin-bottom: 35px;
+  }
   &__wrapper {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

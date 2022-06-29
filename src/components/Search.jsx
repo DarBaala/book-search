@@ -14,8 +14,10 @@ const Search = () => {
   const getBooks = async (event) => {
     event.preventDefault();
     const categoryUrl = category.length > 0 ? `&orderBy=${category}` : "";
-    const sortUrl = sort.length < 1 && sort !== "all" ? "" : `subject:${sort}`;
-
+    let sortUrl = sort.length < 1 && sort !== "all" ? "" : `subject:${sort}`;
+    if (categoryUrl) {
+      sortUrl = sort.length < 1 && sort !== "all" ? "" : `&subject:${sort}`;
+    }
     if (searchField.length > 0) {
       dispatch(fetchBooks({ searchField, sortUrl, categoryUrl }));
     } else {
